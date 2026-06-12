@@ -1,34 +1,23 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rickard Borchers — Backend Developer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+  <title>Rickard Borchers &mdash; Java Backend Developer</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ── PHOSPHOR TERMINAL THEME (matched to perihelion-vigil-devlog) ── */
     :root {
-      --bg:           #020d02;  /* near-black green */
-      --bg-panel:     #040f04;  /* panel / card surface */
-      --border:       #0d3d05;  /* phosphor-faint */
-      --phosphor:     #39ff14;  /* accent + body text */
-      --phosphor-dim: #1a7a0a;  /* labels / meta / muted */
-      --amber:        #ffb000;  /* emphasis / single devlog link */
-      --text:         #39ff14;  /* phosphor body text */
-      --mono:         "Share Tech Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-      --display:      "VT323", "Share Tech Mono", monospace;
-      --nav-h:        60px;
-      /* legacy aliases (existing rules) → mapped to phosphor palette */
-      --surface:  var(--bg-panel);
-      --card:     var(--bg-panel);
-      --indigo:   var(--phosphor);
-      --indigo-h: var(--phosphor);
-      --muted:    var(--phosphor);
-      --subtle:   var(--phosphor-dim);
+      --bg:       #0b0b14;
+      --surface:  #12121f;
+      --card:     #1a1a2e;
+      --border:   #252540;
+      --indigo:   #4f46e5;
+      --indigo-h: #6366f1;
+      --text:     #e2e8f0;
+      --muted:    #9ca3af;
+      --subtle:   #4b5563;
+      --nav-h:    60px;
     }
 
     html { scroll-behavior: smooth; }
@@ -36,25 +25,9 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: var(--mono);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
       font-size: 16px;
-      line-height: 1.65;
-      letter-spacing: 0.02em;
-      text-shadow: 0 0 1px rgba(57, 255, 20, 0.45);
-    }
-
-    /* CRT scanline overlay */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 9999;
-      background: repeating-linear-gradient(to bottom,
-        rgba(0,0,0,0) 0,
-        rgba(0,0,0,0) 2px,
-        rgba(0,0,0,0.18) 3px);
-      opacity: 0.5;
+      line-height: 1.6;
     }
 
     /* ── NAV ── */
@@ -74,66 +47,30 @@
     }
 
     .nav-logo {
-      font-family: var(--display);
-      font-weight: 400;
-      font-size: 1.4rem;
+      font-weight: 700;
+      font-size: 1rem;
       color: var(--text);
       text-decoration: none;
-      letter-spacing: 0.02em;
-      text-shadow: 0 0 6px rgba(57, 255, 20, 0.5);
+      letter-spacing: -0.02em;
     }
 
     .nav-logo span { color: var(--indigo); }
 
     .nav-links {
       display: flex;
-      gap: 1.25rem;
+      gap: 2rem;
       list-style: none;
-      margin-left: auto;
     }
-
-    .nav-status { margin-left: 1.75rem; }
 
     .nav-links a {
-      color: var(--subtle);
+      color: var(--muted);
       text-decoration: none;
       font-size: 0.875rem;
-      letter-spacing: 0.04em;
-      transition: color 0.15s, text-shadow 0.15s;
+      transition: color 0.2s;
     }
 
-    .nav-links a::before { content: "[ "; }
-    .nav-links a::after  { content: " ]"; }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--indigo);
-      text-shadow: 0 0 8px rgba(57, 255, 20, 0.8);
-    }
-
-    /* status block — top right */
-    .nav-status {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 1px;
-      font-size: 0.72rem;
-      letter-spacing: 0.06em;
-      line-height: 1.3;
-      color: var(--subtle);
-    }
-
-    .nav-status em { color: var(--indigo); font-style: normal; }
-
-    .cursor {
-      animation: blink 1.1s step-end infinite;
-      color: var(--indigo);
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50%      { opacity: 0; }
-    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--indigo); }
 
     .nav-toggle {
       display: none;
@@ -153,25 +90,19 @@
 
     .section-label {
       font-size: 0.75rem;
-      font-weight: 400;
+      font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--indigo);
       margin-bottom: 0.75rem;
-      text-shadow: 0 0 6px rgba(57, 255, 20, 0.4);
     }
 
-    .section-label::before { content: "[ "; color: var(--subtle); }
-    .section-label::after  { content: " ]"; color: var(--subtle); }
-
     h2 {
-      font-family: var(--display);
-      font-size: clamp(2.1rem, 5vw, 2.9rem);
-      font-weight: 400;
-      letter-spacing: 0.01em;
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
       margin-bottom: 1rem;
-      color: var(--indigo);
-      text-shadow: 0 0 6px rgba(57, 255, 20, 0.5);
+      color: var(--text);
     }
 
     .divider {
@@ -193,35 +124,35 @@
     }
 
     .hero-eyebrow {
-      font-size: 0.9rem;
-      font-weight: 400;
-      color: var(--subtle);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--indigo);
       letter-spacing: 0.08em;
       margin-bottom: 1.25rem;
       display: flex;
       align-items: center;
-      gap: 0.4rem;
-      flex-wrap: wrap;
+      gap: 0.5rem;
     }
 
-    .hero-eyebrow em { color: var(--phosphor); font-style: normal; }
-    .hero-eyebrow .sep { color: var(--phosphor-dim); margin: 0 0.3rem; }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 2px;
+      background: var(--indigo);
+      border-radius: 1px;
+    }
 
     h1 {
-      font-family: var(--display);
-      font-size: clamp(3rem, 9vw, 5.5rem);
-      font-weight: 400;
-      letter-spacing: 0.01em;
-      line-height: 1.0;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
       margin-bottom: 1.5rem;
       color: var(--text);
-      text-shadow: 0 0 6px rgba(57, 255, 20, 0.5);
     }
 
-    h1 span {
-      color: var(--indigo);
-      text-shadow: 0 0 8px rgba(57, 255, 20, 0.7), 0 0 18px rgba(57, 255, 20, 0.35);
-    }
+    h1 span { color: var(--indigo); }
 
     .hero-tagline {
       font-size: clamp(1rem, 2.5vw, 1.2rem);
@@ -241,44 +172,37 @@
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      padding: 0.6rem 1.2rem;
-      border-radius: 2px;
-      font-family: var(--mono);
+      padding: 0.7rem 1.5rem;
+      border-radius: 6px;
       font-size: 0.9rem;
-      font-weight: 400;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      font-weight: 500;
       text-decoration: none;
-      transition: color 0.15s, background 0.15s, box-shadow 0.15s, text-shadow 0.15s;
+      transition: all 0.2s;
       cursor: pointer;
     }
 
-    .btn::before { content: "[ "; }
-    .btn::after  { content: " ]"; }
-
     .btn-primary {
-      background: transparent;
-      color: var(--indigo);
+      background: var(--indigo);
+      color: #fff;
       border: 1px solid var(--indigo);
-      text-shadow: 0 0 6px rgba(57, 255, 20, 0.4);
     }
 
     .btn-primary:hover {
-      background: rgba(57, 255, 20, 0.1);
-      box-shadow: 0 0 14px rgba(57, 255, 20, 0.25);
-      text-shadow: 0 0 8px rgba(57, 255, 20, 0.8);
+      background: var(--indigo-h);
+      border-color: var(--indigo-h);
+      transform: translateY(-1px);
     }
 
     .btn-ghost {
       background: transparent;
-      color: var(--subtle);
+      color: var(--text);
       border: 1px solid var(--border);
     }
 
     .btn-ghost:hover {
       border-color: var(--indigo);
       color: var(--indigo);
-      text-shadow: 0 0 8px rgba(57, 255, 20, 0.6);
+      transform: translateY(-1px);
     }
 
     .hero-scroll {
@@ -328,7 +252,7 @@
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid var(--indigo);
-      box-shadow: 0 0 0 6px rgba(57, 255, 20, 0.1), 0 0 22px rgba(57, 255, 20, 0.25);
+      box-shadow: 0 0 0 6px rgba(79, 70, 229, 0.12);
       flex-shrink: 0;
     }
 
@@ -359,14 +283,12 @@
     .stat-card:hover { border-color: var(--indigo); }
 
     .stat-number {
-      font-family: var(--display);
-      font-size: 2.2rem;
-      font-weight: 400;
+      font-size: 1.75rem;
+      font-weight: 800;
       color: var(--indigo);
-      letter-spacing: 0.02em;
+      letter-spacing: -0.04em;
       line-height: 1;
       margin-bottom: 0.25rem;
-      text-shadow: 0 0 8px rgba(57, 255, 20, 0.5);
     }
 
     .stat-label {
@@ -456,44 +378,13 @@
 
     .tag {
       font-size: 0.72rem;
-      font-weight: 400;
+      font-weight: 500;
       padding: 0.2rem 0.6rem;
-      border-radius: 2px;
-      background: rgba(57, 255, 20, 0.05);
-      color: var(--subtle);
-      border: 1px solid var(--border);
-      letter-spacing: 0.04em;
-    }
-
-    .tag::before { content: "› "; color: var(--indigo); }
-
-    /* single standout devlog action (Perihelion Vigil only) */
-    .devlog-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      align-self: flex-start;
-      margin-top: 0.25rem;
-      padding: 0.5rem 1rem;
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--amber);
-      border: 1px solid var(--amber);
-      border-radius: 2px;
-      text-shadow: 0 0 8px rgba(255, 176, 0, 0.5);
-      transition: background 0.15s, box-shadow 0.15s, text-shadow 0.15s;
-    }
-
-    .devlog-link::before { content: "[ "; color: var(--amber); }
-    .devlog-link::after  { content: " ]"; color: var(--amber); }
-
-    .devlog-link:hover {
-      background: rgba(255, 176, 0, 0.1);
-      box-shadow: 0 0 16px rgba(255, 176, 0, 0.3);
-      text-shadow: 0 0 10px rgba(255, 176, 0, 0.9);
+      border-radius: 4px;
+      background: rgba(79, 70, 229, 0.12);
+      color: var(--indigo-h);
+      border: 1px solid rgba(79, 70, 229, 0.25);
+      letter-spacing: 0.02em;
     }
 
     /* ── SKILLS ── */
@@ -517,16 +408,12 @@
 
     .skill-group-title {
       font-size: 0.7rem;
-      font-weight: 400;
+      font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--indigo);
       margin-bottom: 0.85rem;
-      text-shadow: 0 0 6px rgba(57, 255, 20, 0.4);
     }
-
-    .skill-group-title::before { content: "[ "; color: var(--subtle); }
-    .skill-group-title::after  { content: " ]"; color: var(--subtle); }
 
     .skill-list {
       display: flex;
@@ -594,41 +481,17 @@
     .contact-item:hover {
       color: var(--text);
       border-color: var(--indigo);
-      background: rgba(57, 255, 20, 0.07);
-    }
-
-    /* emphasis → accent (amber), per devlog convention */
-    em { color: var(--amber); font-style: normal; }
-
-    code {
-      font-family: var(--mono);
-      font-size: 0.85em;
-      color: var(--amber);
-      background: var(--bg-panel, #040f04);
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      padding: 0.05em 0.35em;
+      background: rgba(79, 70, 229, 0.07);
     }
 
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
-      padding: 2.5rem 2rem;
+      padding: 2rem;
       text-align: center;
       color: var(--subtle);
       font-size: 0.8rem;
-      letter-spacing: 0.04em;
     }
-
-    .footer-title {
-      font-family: var(--display);
-      font-size: 1.2rem;
-      color: var(--indigo);
-      text-shadow: 0 0 6px rgba(57, 255, 20, 0.4);
-      margin-bottom: 0.4rem;
-    }
-
-    footer .cursor { color: var(--indigo); }
 
     /* ── FADE-IN ANIMATION ── */
     .fade-in {
@@ -645,9 +508,6 @@
     /* ── MOBILE ── */
     @media (max-width: 768px) {
       nav { padding: 0 1.25rem; }
-
-      .nav-status { display: none; }
-      .nav-links { margin-left: 0; }
 
       .nav-links {
         display: none;
@@ -685,8 +545,8 @@
     /* ── FEATURED PROJECT ── */
     .project-card.featured {
       grid-column: 1 / -1;
-      background: linear-gradient(135deg, #040f04 0%, #061306 100%);
-      border-color: rgba(57, 255, 20, 0.3);
+      background: linear-gradient(135deg, #1a1a2e 0%, #1d1b36 100%);
+      border-color: rgba(79, 70, 229, 0.4);
       padding: 2.25rem;
     }
 
@@ -694,20 +554,16 @@
 
     .featured-badge {
       font-size: 0.65rem;
-      font-weight: 400;
+      font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--indigo);
-      background: transparent;
-      border: 1px solid var(--border);
-      border-radius: 2px;
+      color: var(--indigo-h);
+      background: rgba(79, 70, 229, 0.15);
+      border: 1px solid rgba(79, 70, 229, 0.35);
+      border-radius: 4px;
       padding: 0.2rem 0.55rem;
       flex-shrink: 0;
-      text-shadow: 0 0 6px rgba(57, 255, 20, 0.4);
     }
-
-    .featured-badge::before { content: "[ "; color: var(--subtle); }
-    .featured-badge::after  { content: " ]"; color: var(--subtle); }
 
     .project-name-row {
       display: flex;
@@ -722,7 +578,7 @@
     }
 
     .project-media {
-      background: #061306;
+      background: #16162a;
       border: 1px dashed var(--border);
       border-radius: 6px;
       height: 180px;
@@ -769,17 +625,20 @@
     }
 
     .project-bullets li::before {
-      content: '›';
+      content: '';
       display: inline-block;
-      color: var(--indigo);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--indigo-h);
       flex-shrink: 0;
-      line-height: 1.5;
+      margin-top: 0.55em;
     }
 
     .project-challenge {
       font-size: 0.8rem;
       color: var(--subtle);
-      border-left: 2px solid var(--indigo);
+      border-left: 2px solid rgba(79, 70, 229, 0.5);
       padding-left: 0.75rem;
       line-height: 1.5;
     }
@@ -825,24 +684,55 @@
       .project-card.featured .project-media { height: 140px; }
       .enjoy-section { padding: 3rem 1.25rem; }
     }
+    /* -- FIT SECTION -- */
+    #fit { border-top: 1px solid var(--border); }
 
+    .fit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .fit-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.4rem;
+      min-height: 190px;
+    }
+
+    .fit-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--indigo-h);
+      margin-bottom: 0.75rem;
+    }
+
+    .fit-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    @media (max-width: 768px) {
+      .fit-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
 
   <!-- NAV -->
   <nav id="nav">
-    <a class="nav-logo" href="#hero">RB<span>_</span></a>
+    <a class="nav-logo" href="#hero">RB<span>.</span></a>
     <ul class="nav-links" id="nav-links">
       <li><a href="#about">About</a></li>
+      <li><a href="#fit">Fit</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <div class="nav-status" aria-hidden="true">
-      <span>BUILD: <em>2026.YH</em></span>
-      <span>NODE: <em>STOCKHOLM</em><span class="cursor">_</span></span>
-    </div>
     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
         <line x1="3" y1="6"  x2="21" y2="6"  id="t-top"/>
@@ -856,17 +746,18 @@
   <section id="hero">
     <div class="hero-inner">
       <div class="hero-content">
-        <div class="hero-eyebrow">
-          STATUS: <em>AVAILABLE</em><span class="sep">/</span>NODE: <em>STOCKHOLM</em><span class="cursor">_</span>
-        </div>
+        <div class="hero-eyebrow">Stockholm &mdash; Java backend &amp; production-minded systems</div>
         <h1>Rickard<br><span>Borchers</span></h1>
         <p class="hero-tagline">
-          Backend developer. Java engineer. 12+ years in IT operations, now building the things.
-          I got into computers because of games — I'm still building things nobody asked me to build.
+          Java/backend developer with 12+ years in IT operations. I build Spring systems,
+          automation tools, and game-adjacent software with a production mindset from day one.
         </p>
         <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary">See my work</a>
-          <a href="#contact" class="btn btn-ghost">Get in touch</a>
+          <a href="#projects" class="btn btn-primary">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            View case studies
+          </a>
+          <a href="#contact" class="btn btn-ghost">Contact me</a>
         </div>
       </div>
       <img src="displaypic.jpg" alt="Rickard Borchers" class="hero-photo">
@@ -880,23 +771,26 @@
   <!-- ABOUT -->
   <section id="about">
     <p class="section-label">About</p>
-    <h2>Who I am</h2>
+    <h2>Ops experience turned into backend engineering</h2>
     <div class="divider"></div>
     <div class="about-grid fade-in">
       <div class="about-text">
         <p>
-          I'm completing a two-year YH programme at <strong>Nackademin</strong> (graduating May/June 2026),
-          focused on Java development. Before that: 12+ years in IT operations at IBM, TeleComputing/PwC,
-          PostNord, and Folksam.
+          I am completing Nackademin's two-year Java Developer programme in 2026, after more than a decade
+          in IT operations at IBM, TeleComputing/PwC, PostNord, and Folksam.
         </p>
         <p>
-          That background means I understand how production systems actually behave. At <strong>56N Software AB</strong>
-          (LIA internship), I shipped integrations, found critical security vulnerabilities independently,
-          and bridged a Sweden–India dev team.
+          That path matters: I have seen systems under pressure, coordinated incidents across suppliers,
+          worked in regulated environments, and learned how technical choices show up in production.
         </p>
         <p>
-          Gaming has been part of my life for 30+ years — started on a 386 at five.
-          It's the reason I got into computers, learned to code, and started building tools and game systems.
+          At 56N Software AB, I worked hands-on with an AI marketing SaaS built on Spring Boot, OpenAI,
+          Gemini, and Pinecone. I also identified critical security issues, improved process structure,
+          and translated business risk into concrete technical action.
+        </p>
+        <p>
+          Outside work, I build because I cannot quite help myself: Minecraft automation systems,
+          Electron workflow tools, AI schedulers, and utilities for games where a spreadsheet was not enough.
         </p>
       </div>
       <div class="about-stats">
@@ -906,7 +800,7 @@
         </div>
         <div class="stat-card">
           <div class="stat-number">2026</div>
-          <div class="stat-label">Graduating Nackademin — YH Java Developer</div>
+          <div class="stat-label">Graduating Nackademin &mdash; Java Developer YH</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">30+</div>
@@ -914,21 +808,40 @@
         </div>
         <div class="stat-card">
           <div class="stat-number">LIA</div>
-          <div class="stat-label">56N Software AB — AI SaaS, Spring Boot, security analysis</div>
+          <div class="stat-label">56N Software AB &mdash; AI SaaS, Spring Boot, integrations, security analysis</div>
         </div>
+      </div>
+    </div>
+  </section>
+  <!-- FIT -->
+  <section id="fit">
+    <p class="section-label">What I bring</p>
+    <h2>Useful from both sides of the incident bridge</h2>
+    <div class="divider"></div>
+    <div class="fit-grid fade-in">
+      <div class="fit-card">
+        <div class="fit-title">Backend engineering</div>
+        <p>Java 21, Spring Boot 3, REST APIs, security with JWT, tests, CI/CD, databases, and integrations with external services.</p>
+      </div>
+      <div class="fit-card">
+        <div class="fit-title">Production mindset</div>
+        <p>Long experience from incident handling, regulated environments, supplier coordination, GDPR reporting, and legacy systems.</p>
+      </div>
+      <div class="fit-card">
+        <div class="fit-title">Builder mentality</div>
+        <p>I turn friction into tools: mods, workflow launchers, AI schedulers, calculators, automation layers, and small systems that solve real annoyances.</p>
       </div>
     </div>
   </section>
 
   <!-- ENJOY -->
   <section class="enjoy-section fade-in">
-    <p class="section-label">What I enjoy building</p>
+    <p class="section-label">Currently looking for</p>
     <ul class="enjoy-list">
-      <li>Interconnected gameplay systems</li>
-      <li>Automation mechanics</li>
-      <li>Developer tooling</li>
-      <li>Simulation-style logic</li>
-      <li>Backend architecture</li>
+      <li>Junior Java/backend developer roles</li>
+      <li>Spring Boot and API-focused teams</li>
+      <li>Application management roles where development meets operations</li>
+      <li>Product teams that value production awareness, security, and practical tooling</li>
     </ul>
   </section>
 
@@ -986,7 +899,7 @@
         <div class="project-header">
           <div class="project-name-row">
             <div class="project-name">Pantry Tracker</div>
-            <span class="featured-badge">Thesis</span>
+            <span class="featured-badge">Graduation Project</span>
           </div>
         </div>
         <p class="project-summary">Fullstack household inventory app — graduation thesis with barcode scanning, recipe integration, and live deals.</p>
@@ -1014,42 +927,6 @@
           <span class="tag">JWT</span>
           <span class="tag">GitHub Actions</span>
         </div>
-      </div>
-
-      <!-- Perihelion Vigil -->
-      <div class="project-card featured fade-in">
-        <div class="project-header">
-          <div class="project-name-row">
-            <div class="project-name">Perihelion Vigil</div>
-            <span class="featured-badge">In Development</span>
-          </div>
-        </div>
-        <p class="project-summary">
-          A PS1-era space-RPG built by one person. Low-poly ships, phosphor terminals, a world you
-          <em>operate</em> rather than watch — you sit at the console, read the sensors, and write to the
-          machine that flies the ship.
-        </p>
-        <div class="featured-body">
-          <div>
-            <div class="project-bullets-label">Interesting parts</div>
-            <ul class="project-bullets">
-              <li><strong>HeliOS</strong> — an in-world OS running on a custom bytecode VM</li>
-              <li><code>.hel</code> scripts, line-numbered and event-driven</li>
-              <li>Every terminal is a real program, interpreted line by line by an engine built from scratch</li>
-              <li>Low-poly as a deliberate aesthetic choice, not a budget compromise</li>
-            </ul>
-          </div>
-          <div>
-            <p class="project-challenge"><strong>Technical challenge:</strong> Building a bytecode VM with a BASIC-like scripting language where world events trigger the player's scripts in real time.</p>
-          </div>
-        </div>
-        <div class="project-tags">
-          <span class="tag">Godot 4</span>
-          <span class="tag">GDScript</span>
-          <span class="tag">HeliOS (custom VM)</span>
-          <span class="tag">Low-poly</span>
-        </div>
-        <a href="https://winterunmute.github.io/perihelion-vigil-devlog/" class="devlog-link" target="_blank" rel="noopener">Devlog →</a>
       </div>
 
       <!-- Foxhole Artillery Calculator -->
@@ -1180,6 +1057,7 @@
         <div class="skill-list">
           <span class="skill-item">NeoForge / Java modding</span>
           <span class="skill-item">Unreal Engine (self-studied)</span>
+          <span class="skill-item">PIC microcontrollers / C</span>
         </div>
       </div>
 
@@ -1211,8 +1089,8 @@
     <h2>Let's talk</h2>
     <div class="divider"></div>
     <p class="contact-sub">
-      Graduating May 2026. Open to backend and systems development roles in Stockholm.
-      Reach out directly — I reply fast.
+      Graduating in 2026 and open to Java/backend, platform-adjacent, and application management roles
+      in Stockholm or remote/hybrid. Reach out directly &mdash; I reply fast.
     </p>
     <div class="contact-links fade-in">
       <a href="mailto:RickardBorchers@gmail.com" class="contact-item">
@@ -1231,8 +1109,7 @@
   </section>
 
   <footer>
-    <div class="footer-title">RB_TERMINAL</div>
-    <span>// Rickard Borchers — Stockholm — transmitted from low orbit, 2026<span class="cursor">_</span></span>
+    <span>Rickard Borchers &mdash; Stockholm &mdash; 2026</span>
   </footer>
 
   <script>
@@ -1307,3 +1184,4 @@
 
 </body>
 </html>
+
