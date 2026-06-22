@@ -630,6 +630,26 @@
 
     footer .cursor { color: var(--indigo); }
 
+    /* hidden easter egg — barely visible until you go looking */
+    .egg {
+      display: inline-block;
+      margin-top: 1.5rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      color: rgba(57, 255, 20, 0.06);
+      text-decoration: none;
+      text-shadow: none;
+      cursor: default;
+      transition: color 0.4s, text-shadow 0.4s;
+      user-select: none;
+    }
+
+    .egg:hover {
+      color: var(--amber);
+      text-shadow: 0 0 8px rgba(255, 176, 0, 0.7);
+      cursor: pointer;
+    }
+
     /* ── FADE-IN ANIMATION ── */
     .fade-in {
       opacity: 0;
@@ -1233,6 +1253,8 @@
   <footer>
     <div class="footer-title">RB_TERMINAL</div>
     <span>// Rickard Borchers — Stockholm — transmitted from low orbit, 2026<span class="cursor">_</span></span>
+    <br>
+    <a class="egg" href="https://winterunmute.github.io/drill-down/" target="_blank" rel="noopener">are you bored?</a>
   </footer>
 
   <script>
