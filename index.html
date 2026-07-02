@@ -322,14 +322,32 @@
 
     .hero-content { flex: 1; }
 
-    .hero-photo {
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--indigo);
-      box-shadow: 0 0 0 6px rgba(57, 255, 20, 0.1), 0 0 22px rgba(57, 255, 20, 0.25);
+    .hero-photo-frame {
       flex-shrink: 0;
+      margin: 0;
+      padding: 10px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      box-shadow: 0 0 22px rgba(57, 255, 20, 0.12);
+    }
+
+    .hero-photo-frame figcaption {
+      margin-top: 9px;
+      font-size: 0.66rem;
+      letter-spacing: 0.08em;
+      text-align: center;
+      color: var(--subtle);
+    }
+
+    .hero-photo {
+      display: block;
+      width: 300px;
+      height: 300px;
+      border-radius: 2px;
+      object-fit: cover;
+      border: 1px solid var(--phosphor-dim);
+      filter: grayscale(1) sepia(1) hue-rotate(64deg) saturate(2.4) brightness(0.72) contrast(1.25);
     }
 
     .about-text p {
@@ -650,6 +668,23 @@
       cursor: pointer;
     }
 
+    /* ── BOOT SEQUENCE ── */
+    .boot-line {
+      min-height: 2.6em;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--subtle);
+      white-space: pre-line;
+    }
+
+    .hero-inner { transition: opacity 0.7s ease, transform 0.7s ease; }
+
+    html.booting .hero-inner {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
     /* ── FADE-IN ANIMATION ── */
     .fade-in {
       opacity: 0;
@@ -850,6 +885,17 @@
 </head>
 <body>
 
+  <script>
+    // Hide the hero until the boot sequence finishes — skipped for reduced motion,
+    // with a hard fallback so the page can never stay hidden.
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('booting');
+      setTimeout(function () {
+        document.documentElement.classList.remove('booting');
+      }, 4000);
+    }
+  </script>
+
   <!-- NAV -->
   <nav id="nav">
     <a class="nav-logo" href="#hero">RB<span>_</span></a>
@@ -874,6 +920,7 @@
 
   <!-- HERO -->
   <section id="hero">
+    <div class="boot-line" id="boot-line" aria-hidden="true"></div>
     <div class="hero-inner">
       <div class="hero-content">
         <div class="hero-eyebrow">
@@ -889,7 +936,10 @@
           <a href="#contact" class="btn btn-ghost">Get in touch</a>
         </div>
       </div>
-      <img src="displaypic.jpg" alt="Rickard Borchers" class="hero-photo">
+      <figure class="hero-photo-frame">
+        <img src="displaypic.jpg" alt="Rickard Borchers" class="hero-photo">
+        <figcaption>[ VISUAL FEED // NODE: STOCKHOLM ]</figcaption>
+      </figure>
     </div>
     <div class="hero-scroll">
       <div class="scroll-dot"></div>
@@ -1258,6 +1308,30 @@
   </footer>
 
   <script>
+    // Boot sequence — types the init log, then reveals the hero
+    (function () {
+      var bootEl = document.getElementById('boot-line');
+      var full = '> INIT RB_TERMINAL v2026.YH ... OK\n> PHOSPHOR LINK NOMINAL';
+
+      if (!document.documentElement.classList.contains('booting')) {
+        bootEl.textContent = full;
+        return;
+      }
+
+      var i = 0;
+      function type() {
+        if (i <= full.length) {
+          bootEl.textContent = full.slice(0, i) + (i < full.length ? '█' : '');
+          var pause = full.charAt(i) === '\n' ? 260 : 14;
+          i++;
+          setTimeout(type, pause);
+        } else {
+          document.documentElement.classList.remove('booting');
+        }
+      }
+      setTimeout(type, 150);
+    })();
+
     // Mobile nav toggle
     const toggle = document.getElementById('nav-toggle');
     const navLinks = document.getElementById('nav-links');
