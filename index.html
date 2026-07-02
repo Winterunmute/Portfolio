@@ -556,7 +556,7 @@
       font-size: 0.825rem;
       color: var(--muted);
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 0.5rem;
     }
 
@@ -565,6 +565,7 @@
       display: inline-block;
       width: 4px;
       height: 4px;
+      margin-top: 0.55em;
       border-radius: 50%;
       background: var(--subtle);
       flex-shrink: 0;
@@ -726,14 +727,20 @@
 
       .about-grid { grid-template-columns: 1fr; }
       .hero-inner { flex-direction: column-reverse; gap: 2rem; }
-      .hero-photo { width: 160px; height: 160px; }
 
       .projects-grid { grid-template-columns: 1fr; }
 
       .skills-grid { grid-template-columns: 1fr 1fr; }
+
+      .project-card.featured { padding: 1.5rem; }
+
+      /* keep the frame no wider than its photo — the caption wraps instead */
+      .hero-photo { width: 220px; height: 220px; }
+      .hero-photo-frame { max-width: 242px; }
+      .hero-photo-frame figcaption { font-size: 0.6rem; white-space: normal; }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 640px) {
       .skills-grid { grid-template-columns: 1fr; }
     }
 
@@ -1042,7 +1049,6 @@
             </ul>
           </div>
         </div>
-        <p class="project-challenge"><strong>Technical challenge:</strong> Building a harvest system that works across vanilla and mod-added crops without hardcoding each block type individually.</p>
         <div class="project-tags">
           <span class="tag">Java</span>
           <span class="tag">NeoForge</span>
