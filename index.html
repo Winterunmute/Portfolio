@@ -1181,52 +1181,6 @@
         </div>
       </div>
 
-      <!-- MAGI -->
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <div class="project-name">MAGI</div>
-        </div>
-        <p class="project-summary">RAG-based personal memory agent — make the model <em>personal</em> instead of smarter.</p>
-        <div class="project-bullets-label">Interesting parts</div>
-        <ul class="project-bullets">
-          <li>Harvests finished dev conversations and distils each into structured memories (problem / solution / context) via LLM</li>
-          <li>Local embeddings (BGE sentence-transformers) stored in Qdrant, metadata in SQLite</li>
-          <li>Retrieves and ranks relevant past solutions as context for the next session</li>
-          <li>Config-driven and portable — designed to run fully local on dedicated inference hardware</li>
-        </ul>
-        <p class="project-challenge"><strong>Technical challenge:</strong> Ranking which past memories are actually worth spending context window on — retrieval that's too eager is as useless as no memory at all.</p>
-        <div class="project-tags">
-          <span class="tag">Python</span>
-          <span class="tag">Qdrant</span>
-          <span class="tag">sentence-transformers</span>
-          <span class="tag">LiteLLM</span>
-          <span class="tag">Claude API</span>
-        </div>
-      </div>
-
-      <!-- Zero System / Haro -->
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <div class="project-name">Zero System / Haro</div>
-        </div>
-        <p class="project-summary">Linux automation platform — a Debian daemon runs task pipelines dispatched from Windows, with zero cloud dependency.</p>
-        <div class="project-bullets-label">Interesting parts</div>
-        <ul class="project-bullets">
-          <li>systemd-managed daemon with inotify event-driven pipeline execution</li>
-          <li>Tasks dispatched over a Syncthing-synced folder — the filesystem is the queue</li>
-          <li>Git automation for commit/push workflows across machines</li>
-          <li>Terminal dashboard for real-time monitoring</li>
-        </ul>
-        <p class="project-challenge"><strong>Technical challenge:</strong> Reliable cross-machine hand-off with no shared network service — every step has to tolerate sync lag and partial writes.</p>
-        <div class="project-tags">
-          <span class="tag">Linux</span>
-          <span class="tag">Debian</span>
-          <span class="tag">systemd</span>
-          <span class="tag">Bash</span>
-          <span class="tag">Syncthing</span>
-        </div>
-      </div>
-
     </div>
   </section>
 
