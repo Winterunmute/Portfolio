@@ -962,18 +962,22 @@
     <div class="about-grid fade-in">
       <div class="about-text">
         <p>
-          I'm completing a two-year YH programme at <strong>Nackademin</strong> (graduating May/June 2026),
-          focused on Java development. Before that: 12+ years in IT operations at IBM, TeleComputing/PwC,
-          PostNord, and Folksam.
+          I graduated from <strong>Nackademin's</strong> two-year YH Java Developer programme in June 2026 —
+          400p, with distinction (VG) in IT security, Java backend and the thesis project. Before that:
+          12+ years in IT operations at IBM, TeleComputing/PwC, PostNord, and Folksam.
         </p>
         <p>
           That background means I understand how production systems actually behave. At <strong>56N Software AB</strong>
-          (LIA internship), I shipped integrations, found critical security vulnerabilities independently,
-          and bridged a Sweden–India dev team.
+          (LIA internship), I found critical security vulnerabilities on my own initiative — plaintext credentials
+          in version control and a publicly exposed super-admin registration endpoint — and bridged a
+          Sweden–India dev team.
         </p>
         <p>
           Gaming has been part of my life for 30+ years — started on a 386 at five.
           It's the reason I got into computers, learned to code, and started building tools and game systems.
+          Along the way: KTH courses in C and embedded electronics (PIC microcontrollers, a taste of assembly),
+          and a few years building electronic instruments in Max/MSP while co-organising
+          <em>Syntax Error</em>, a gaming-music club night.
         </p>
       </div>
       <div class="about-stats">
@@ -983,7 +987,7 @@
         </div>
         <div class="stat-card">
           <div class="stat-number">2026</div>
-          <div class="stat-label">Graduating Nackademin — YH Java Developer</div>
+          <div class="stat-label">Graduated Nackademin — YH Java Developer, VG thesis</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">30+</div>
@@ -1062,7 +1066,7 @@
         <div class="project-header">
           <div class="project-name-row">
             <div class="project-name">Pantry Tracker</div>
-            <span class="featured-badge">Thesis</span>
+            <span class="featured-badge">Thesis — VG</span>
           </div>
         </div>
         <p class="project-summary">Fullstack household inventory app — graduation thesis with barcode scanning, recipe integration, and live deals.</p>
@@ -1109,20 +1113,21 @@
           <div>
             <div class="project-bullets-label">Interesting parts</div>
             <ul class="project-bullets">
-              <li><strong>HeliOS</strong> — an in-world OS running on a custom bytecode VM</li>
-              <li><code>.hel</code> scripts, line-numbered and event-driven</li>
-              <li>Every terminal is a real program, interpreted line by line by an engine built from scratch</li>
-              <li>Low-poly as a deliberate aesthetic choice, not a budget compromise</li>
+              <li><strong>HeliOS</strong> — an in-world scripting language built from scratch: lexer, two-pass parser, coroutine-based executor</li>
+              <li>Multi-CPU execution model — every in-game CPU runs its own program (program counter, variables, event queue) against shared world state</li>
+              <li><strong>HE-3 Extraktion</strong> — a standalone factory-game spinoff where writing better HeliOS code <em>is</em> the game; verified by headless self-tests</li>
+              <li>AI-native development: a custom Godot editor plugin + MCP bridge lets Claude co-build scenes directly in the editor</li>
             </ul>
           </div>
           <div>
-            <p class="project-challenge"><strong>Technical challenge:</strong> Building a bytecode VM with a BASIC-like scripting language where world events trigger the player's scripts in real time.</p>
+            <p class="project-challenge"><strong>Technical challenge:</strong> Building a scripting VM where world events trigger the player's programs in real time — while an authoritative fixed-step simulation keeps the factory deterministic.</p>
           </div>
         </div>
         <div class="project-tags">
           <span class="tag">Godot 4</span>
           <span class="tag">GDScript</span>
           <span class="tag">HeliOS (custom VM)</span>
+          <span class="tag">MCP</span>
           <span class="tag">Low-poly</span>
         </div>
         <a href="https://winterunmute.github.io/perihelion-vigil-devlog/" class="devlog-link" target="_blank" rel="noopener">Devlog →</a>
@@ -1173,6 +1178,52 @@
           <span class="tag">Node.js</span>
           <span class="tag">GitHub API</span>
           <span class="tag">Windows</span>
+        </div>
+      </div>
+
+      <!-- MAGI -->
+      <div class="project-card fade-in">
+        <div class="project-header">
+          <div class="project-name">MAGI</div>
+        </div>
+        <p class="project-summary">RAG-based personal memory agent — make the model <em>personal</em> instead of smarter.</p>
+        <div class="project-bullets-label">Interesting parts</div>
+        <ul class="project-bullets">
+          <li>Harvests finished dev conversations and distils each into structured memories (problem / solution / context) via LLM</li>
+          <li>Local embeddings (BGE sentence-transformers) stored in Qdrant, metadata in SQLite</li>
+          <li>Retrieves and ranks relevant past solutions as context for the next session</li>
+          <li>Config-driven and portable — designed to run fully local on dedicated inference hardware</li>
+        </ul>
+        <p class="project-challenge"><strong>Technical challenge:</strong> Ranking which past memories are actually worth spending context window on — retrieval that's too eager is as useless as no memory at all.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Qdrant</span>
+          <span class="tag">sentence-transformers</span>
+          <span class="tag">LiteLLM</span>
+          <span class="tag">Claude API</span>
+        </div>
+      </div>
+
+      <!-- Zero System / Haro -->
+      <div class="project-card fade-in">
+        <div class="project-header">
+          <div class="project-name">Zero System / Haro</div>
+        </div>
+        <p class="project-summary">Linux automation platform — a Debian daemon runs task pipelines dispatched from Windows, with zero cloud dependency.</p>
+        <div class="project-bullets-label">Interesting parts</div>
+        <ul class="project-bullets">
+          <li>systemd-managed daemon with inotify event-driven pipeline execution</li>
+          <li>Tasks dispatched over a Syncthing-synced folder — the filesystem is the queue</li>
+          <li>Git automation for commit/push workflows across machines</li>
+          <li>Terminal dashboard for real-time monitoring</li>
+        </ul>
+        <p class="project-challenge"><strong>Technical challenge:</strong> Reliable cross-machine hand-off with no shared network service — every step has to tolerate sync lag and partial writes.</p>
+        <div class="project-tags">
+          <span class="tag">Linux</span>
+          <span class="tag">Debian</span>
+          <span class="tag">systemd</span>
+          <span class="tag">Bash</span>
+          <span class="tag">Syncthing</span>
         </div>
       </div>
 
@@ -1243,11 +1294,11 @@
       <div class="skill-group fade-in">
         <div class="skill-group-title">AI &amp; Integration</div>
         <div class="skill-list">
-          <span class="skill-item">OpenAI, Gemini, Pinecone</span>
+          <span class="skill-item">LLM APIs — Claude, OpenAI, Gemini</span>
+          <span class="skill-item">RAG — Qdrant, embeddings, LiteLLM</span>
           <span class="skill-item">FastAPI / Python pipelines</span>
-          <span class="skill-item">AirLLM — local inference</span>
+          <span class="skill-item">MCP servers &amp; agent flows</span>
           <span class="skill-item">OAuth 2.0 / OIDC</span>
-          <span class="skill-item">Automated agent flows</span>
         </div>
       </div>
 
@@ -1287,8 +1338,8 @@
     <h2>Let's talk</h2>
     <div class="divider"></div>
     <p class="contact-sub">
-      Graduating May 2026. Open to backend and systems development roles in Stockholm.
-      Reach out directly — I reply fast.
+      Graduated June 2026 — available immediately. Open to backend, systems and
+      platform roles in Stockholm. Reach out directly — I reply fast.
     </p>
     <div class="contact-links fade-in">
       <a href="mailto:RickardBorchers@gmail.com" class="contact-item">
